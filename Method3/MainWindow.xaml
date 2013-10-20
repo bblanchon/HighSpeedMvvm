@@ -1,0 +1,15 @@
+﻿<Window x:Class="Method3.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Method3" Height="80" Width="400"
+        xmlns:my="clr-namespace:Method3">
+    <Window.Tag>
+        <my:CommandTimer Command="{Binding Refresh}" />
+    </Window.Tag>
+    <UniformGrid Rows="2">
+        <TextBlock>
+            Method3: the View owns a CommandTimer
+        </TextBlock>
+        <ProgressBar Value="{Binding Progress}" />
+    </UniformGrid>
+</Window>

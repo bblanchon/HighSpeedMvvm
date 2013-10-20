@@ -15,7 +15,7 @@ namespace Method4
         }
 
         public double Progress { get; private set; }
-        public event Action<double> ProgressChanged;
+        //public event Action<double> ProgressChanged; (not required anymore)
 
         void LongRunningBackgroundTask()
         {
@@ -28,8 +28,7 @@ namespace Method4
             {
                 Progress = 100.0 * chrono.ElapsedTicks / duration.Ticks;
 
-                if (ProgressChanged != null)
-                    ProgressChanged(Progress);
+                // no need to raise a event anymore
             }
         }
     }

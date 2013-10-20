@@ -1,4 +1,4 @@
-Updating ViewModel with a Model changing very quickly
+How to implement polling in MVVM
 =
 
 The classic MVVM approach, in which you constantly keep your ViewModel (and thus your View) perfectly synchronized with your Model, soon reaches its limits 

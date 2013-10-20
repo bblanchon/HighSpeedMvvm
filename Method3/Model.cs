@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,15 +19,17 @@ namespace Method3
 
         void LongRunningBackgroundTask()
         {
-            while( Progress < 100)
+            var duration = TimeSpan.FromSeconds(20);
+            var chrono = new Stopwatch();
+
+            chrono.Start();
+
+            while (chrono.Elapsed < duration)
             {
-                // Note about this example Model:
-                // You may need to have an even smaller increment on a fast computer
-                // otherwise Progress would reach 100 too quickly
-                Progress += 0.0000001; 
+                Progress = 100.0 * chrono.ElapsedTicks / duration.Ticks;
 
                 if (ProgressChanged != null)
-                    ProgressChanged(Progress);          
+                    ProgressChanged(Progress);
             }
         }
     }

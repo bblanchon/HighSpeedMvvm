@@ -4,7 +4,7 @@
         Title="Method2" Height="80" Width="400">
     <UniformGrid Rows="2">
         <TextBlock>
-            Method2: the ViewModel own a DispatcherTimer
+            Method 2 : ViewModel owns a DispatcherTimer
         </TextBlock>
         <ProgressBar Value="{Binding Progress}" />
     </UniformGrid>

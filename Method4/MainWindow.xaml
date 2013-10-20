@@ -4,7 +4,7 @@
         Title="Method4" Height="80" Width="400">
     <UniformGrid Rows="2">
         <TextBlock>
-            Method4: the View periodically calls a methods of the ViewModel
+            Method 4 : View is attached to CompositionTarget.Rendering
         </TextBlock>
         <ProgressBar Value="{Binding Progress}" />
     </UniformGrid>

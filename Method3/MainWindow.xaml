@@ -4,7 +4,7 @@
         Title="Method3" Height="80" Width="400">
     <UniformGrid Rows="2">
         <TextBlock>
-            Method3: the View periodically excecutes a ICommand
+            Method 3 : View owns a DispatcherTimer
         </TextBlock>
         <ProgressBar Value="{Binding Progress}" />
     </UniformGrid>

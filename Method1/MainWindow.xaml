@@ -4,7 +4,7 @@
         Title="Method1" Height="80" Width="400">
     <UniformGrid Rows="2">
         <TextBlock>
-            Method1: the ViewModel is tied to the event of the Model
+            Method 1 : ViewModel is attached to Model's events
         </TextBlock>
         <ProgressBar Value="{Binding Progress}" />
     </UniformGrid>

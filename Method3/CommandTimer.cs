@@ -18,7 +18,7 @@ namespace Method3
             DependencyProperty.Register("CommandTarget", typeof(IInputElement), typeof(CommandTimer), new PropertyMetadata(null));
 
         public static readonly DependencyProperty IntervalProperty =
-            DependencyProperty.Register("Interval", typeof(TimeSpan), typeof(CommandTimer), new PropertyMetadata(TimeSpan.FromSeconds(1), OnIntervalPropertyChanged));
+            DependencyProperty.Register("Interval", typeof(TimeSpan), typeof(CommandTimer), new PropertyMetadata(TimeSpan.FromMilliseconds(5), OnIntervalPropertyChanged));
         
         public static readonly DependencyProperty IsEnabledProperty =
             DependencyProperty.Register("IsEnabled", typeof(bool), typeof(CommandTimer), new PropertyMetadata(true, OnIsEnabledPropertyChanged));

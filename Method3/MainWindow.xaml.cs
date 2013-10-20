@@ -20,11 +20,17 @@ namespace Method3
     /// </summary>
     public partial class MainWindow : Window
     {
+        readonly CommandTimer timer;
+
         public MainWindow()
         {
             InitializeComponent();
 
-            DataContext = new ViewModel();
+            var vm = new ViewModel();
+            timer = new CommandTimer();
+            timer.Command = vm.Refresh;
+
+            DataContext = vm;
         }
     }
 }

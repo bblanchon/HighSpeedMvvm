@@ -69,6 +69,8 @@ It's a perfectly viable solution for anyone that uses Reactive framework, but th
 
 If you run the sample project [MvvmHighFrequency.Solution1](Solution1), you'd see that the GUI is responsive an the `Model`'s execution speed is much faster.
 
+![Screen Capture](Solution1/Pictures/ScreenCapture.png "Responsing GUI and acceptable performance")
+
 Solution 2 :  Poll with a DispatcherTimer
 -
 

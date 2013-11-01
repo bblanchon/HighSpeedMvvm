@@ -7,8 +7,8 @@
     <ProjectGuid>{1864CEF9-DBCA-49EC-ADC1-A86DC7E2FEC9}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>MvvmHighFrequency</RootNamespace>
-    <AssemblyName>MvvmHighFrequency.Model</AssemblyName>
+    <RootNamespace>MvvmHighFrequency.Common</RootNamespace>
+    <AssemblyName>MvvmHighFrequency.Common</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -41,6 +41,7 @@
   <ItemGroup>
     <Compile Include="Model.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModelBase.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

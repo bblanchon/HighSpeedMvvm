@@ -16,7 +16,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Solution1", "Solution1\Solution1.csproj", "{A7D750C4-EFB0-4814-B5C1-67254690AB34}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Model", "Model\Model.csproj", "{1864CEF9-DBCA-49EC-ADC1-A86DC7E2FEC9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "Model\Common.csproj", "{1864CEF9-DBCA-49EC-ADC1-A86DC7E2FEC9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

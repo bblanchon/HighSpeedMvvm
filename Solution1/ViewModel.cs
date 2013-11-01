@@ -1,4 +1,5 @@
 ﻿using MvvmHighFrequency;
+using MvvmHighFrequency.Common;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -11,12 +12,10 @@ using System.Windows.Threading;
 
 namespace Solution1
 {
-    class ViewModel : INotifyPropertyChanged
+    class ViewModel : ViewModelBase
     {
         readonly Model model;
         readonly Dispatcher dispatcher;
-        double progress;
-        double frequency;
 
         public ViewModel()
         {
@@ -33,43 +32,5 @@ namespace Solution1
                  .ObserveOn(dispatcher)
                  .Subscribe(x => Frequency = x.EventArgs);
         }
-
-        #region Public properties
-
-        public double Frequency
-        {
-            get { return frequency; }
-            set
-            {
-                if (frequency == value) return;
-                frequency = value;
-                RaisePropertyChanged("Frequency");
-            }
-        }
-
-        public double Progress
-        {
-            get { return progress; }
-            set
-            {
-                if (progress == value) return;
-                progress = value;
-                RaisePropertyChanged("Progress");
-            }
-        }
-
-        #endregion
-
-        #region INotifyPropertyChanged
-
-        void RaisePropertyChanged(string propertyName)
-        {
-            if (PropertyChanged != null)
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        #endregion
     }
 }

@@ -1,4 +1,5 @@
 ﻿using MvvmHighFrequency;
+using MvvmHighFrequency.Common;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -10,11 +11,10 @@ using System.Windows.Threading;
 
 namespace Method1
 {
-    class ViewModel : INotifyPropertyChanged
+    class ViewModel : ViewModelBase
     {
         readonly Model model;
         readonly Dispatcher dispatcher;
-        double progress, frequency;
 
         public ViewModel()
         {
@@ -33,44 +33,6 @@ namespace Method1
         void OnModelFrequencyChanged(object sender, double newValue)
         {
             dispatcher.BeginInvoke((Action)delegate() { Frequency = newValue; });
-        }
-
-        #region Public properties
-
-        public double Frequency
-        {
-            get { return frequency; }
-            set
-            {
-                if (frequency == value) return;
-                frequency = value;
-                RaisePropertyChanged("Frequency");
-            }
-        }
-
-        public double Progress
-        {
-            get { return progress; }
-            set
-            {
-                if (progress == value) return;
-                progress = value;
-                RaisePropertyChanged("Progress");
-            }
-        }
-
-        #endregion
-        
-        #region INotifyPropertyChanged
-
-        void RaisePropertyChanged(string propertyName)
-        {
-            if (PropertyChanged != null)
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        #endregion
+        }    
     }
 }

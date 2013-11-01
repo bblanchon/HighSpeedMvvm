@@ -15,28 +15,45 @@ namespace Method4
     {
         readonly Model model;
         double progress;
+        double frequency;
 
         public ViewModel()
         {
             model = new Model();
-        }
-              
-        public double Progress
-        {
-            get { return progress; }
-            set
-            {
-                if( progress == value ) return;
-                progress = value;
-                RaisePropertyChanged("Progress");
-            }
-        }
+        }               
 
         #region IRefresh
 
         public void Refresh()
         {
             Progress = model.Progress;
+            Frequency = model.Frequency;
+        }
+
+        #endregion
+
+        #region Public properties
+
+        public double Frequency
+        {
+            get { return frequency; }
+            set
+            {
+                if (frequency == value) return;
+                frequency = value;
+                RaisePropertyChanged("Frequency");
+            }
+        }
+
+        public double Progress
+        {
+            get { return progress; }
+            set
+            {
+                if (progress == value) return;
+                progress = value;
+                RaisePropertyChanged("Progress");
+            }
         }
 
         #endregion

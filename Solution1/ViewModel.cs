@@ -16,6 +16,7 @@ namespace Solution1
         readonly Model model;
         readonly Dispatcher dispatcher;
         double progress;
+        double frequency;
 
         public ViewModel()
         {
@@ -24,8 +25,26 @@ namespace Solution1
 
             Observable.FromEventPattern<double>(model, "ProgressChanged")
                  .Sample(TimeSpan.FromMilliseconds(20))
-                 .ObserveOn(dispatcher)                                  
+                 .ObserveOn(dispatcher)
                  .Subscribe(x => Progress = x.EventArgs);
+
+            Observable.FromEventPattern<double>(model, "FrequencyChanged")
+                 .Sample(TimeSpan.FromMilliseconds(20))
+                 .ObserveOn(dispatcher)
+                 .Subscribe(x => Frequency = x.EventArgs);
+        }
+
+        #region Public properties
+
+        public double Frequency
+        {
+            get { return frequency; }
+            set
+            {
+                if (frequency == value) return;
+                frequency = value;
+                RaisePropertyChanged("Frequency");
+            }
         }
 
         public double Progress
@@ -33,11 +52,13 @@ namespace Solution1
             get { return progress; }
             set
             {
-                if( progress == value ) return;
+                if (progress == value) return;
                 progress = value;
                 RaisePropertyChanged("Progress");
             }
         }
+
+        #endregion
 
         #region INotifyPropertyChanged
 

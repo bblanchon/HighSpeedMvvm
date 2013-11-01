@@ -13,7 +13,7 @@ namespace Method2
     class ViewModel : INotifyPropertyChanged
     {
         readonly Model model;
-        double progress;
+        double progress, frequency;
 
         public ViewModel()
         {
@@ -25,21 +25,37 @@ namespace Method2
             timer.Start();
         }
 
+        void OnTimerTick(object sender, EventArgs e)
+        {
+            Progress = model.Progress;
+            Frequency = model.Frequency;
+        }
+
+        #region Public properties
+
+        public double Frequency
+        {
+            get { return frequency; }
+            set
+            {
+                if (frequency == value) return;
+                frequency = value;
+                RaisePropertyChanged("Frequency");
+            }
+        }
+
         public double Progress
         {
             get { return progress; }
             set
             {
-                if( progress == value ) return;
+                if (progress == value) return;
                 progress = value;
                 RaisePropertyChanged("Progress");
             }
         }
 
-        void OnTimerTick(object sender, EventArgs e)
-        {
-            Progress = model.Progress;
-        }
+        #endregion
 
         #region INotifyPropertyChanged
 

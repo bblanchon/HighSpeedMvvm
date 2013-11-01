@@ -14,7 +14,7 @@ namespace Method1
     {
         readonly Model model;
         readonly Dispatcher dispatcher;
-        double progress;
+        double progress, frequency;
 
         public ViewModel()
         {
@@ -22,17 +22,7 @@ namespace Method1
             model = new Model();
 
             model.ProgressChanged += OnModelProgressChanged;
-        }
-
-        public double Progress
-        {
-            get { return progress; }
-            set
-            {
-                if( progress == value ) return;
-                progress = value;
-                RaisePropertyChanged("Progress");
-            }
+            model.FrequencyChanged += OnModelFrequencyChanged;
         }
 
         void OnModelProgressChanged(object sender, double newValue)
@@ -40,6 +30,37 @@ namespace Method1
             dispatcher.BeginInvoke((Action)delegate() { Progress = newValue; });
         }
 
+        void OnModelFrequencyChanged(object sender, double newValue)
+        {
+            dispatcher.BeginInvoke((Action)delegate() { Frequency = newValue; });
+        }
+
+        #region Public properties
+
+        public double Frequency
+        {
+            get { return frequency; }
+            set
+            {
+                if (frequency == value) return;
+                frequency = value;
+                RaisePropertyChanged("Frequency");
+            }
+        }
+
+        public double Progress
+        {
+            get { return progress; }
+            set
+            {
+                if (progress == value) return;
+                progress = value;
+                RaisePropertyChanged("Progress");
+            }
+        }
+
+        #endregion
+        
         #region INotifyPropertyChanged
 
         void RaisePropertyChanged(string propertyName)

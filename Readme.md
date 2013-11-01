@@ -43,6 +43,10 @@ However, this approach wont work well if the Model's events are raised very freq
 
 If you run the sample project [MvvmHighFrequency.Problem](Problem), you'd see that the GUI is completely frozen. If you're lucky you wont have a `OutOfMemoryException` (indeed, each call to `BeginInvoke()` instanciate a message), you'll see that the execution speed of the `Model` is really affected.
 
+![Screen Capture](Problem/Pictures/ScreenCapture1.png "GUI is stuck during about 1 minute")
+
+![Screen Capture](Problem/Pictures/ScreenCapture2.png "Eventually it goes to the end with very poor performance")
+
 Solution 1 : Ignore events that are too closed
 -
 
@@ -64,7 +68,6 @@ Here I used Reactive Framework because it offers the `Sample()` method which lim
 It's a perfectly viable solution for anyone that uses Reactive framework, but the two next solutions provide a much simpler approach without extra library.
 
 If you run the sample project [MvvmHighFrequency.Solution1](Solution1), you'd see that the GUI is responsive an the `Model`'s execution speed is much faster.
-
 
 Solution 2 :  Poll with a DispatcherTimer
 -

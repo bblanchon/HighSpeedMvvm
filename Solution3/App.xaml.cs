@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 
-namespace MvvmHighFrequency.Solution3
+namespace HighSpeedMvvm.Solution3
 {
     /// <summary>
     /// Interaction logic for App.xaml

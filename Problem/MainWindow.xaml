@@ -1,4 +1,4 @@
-﻿<Window x:Class="MvvmHighFrequency.Problem.MainWindow"
+﻿<Window x:Class="HighSpeedMvvm.Problem.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="Problem" Height="143" Width="354" ResizeMode="NoResize">

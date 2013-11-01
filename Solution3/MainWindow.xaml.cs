@@ -2,7 +2,7 @@
 using System.Windows;
 using System.Windows.Media;
 
-namespace MvvmHighFrequency.Solution3
+namespace HighSpeedMvvm.Solution3
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml

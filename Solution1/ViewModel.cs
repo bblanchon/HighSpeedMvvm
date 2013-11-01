@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Reactive.Linq;
 using System.Windows.Threading;
-using MvvmHighFrequency.Common;
+using HighSpeedMvvm.Common;
 
-namespace MvvmHighFrequency.Solution1
+namespace HighSpeedMvvm.Solution1
 {
     class ViewModel : ViewModelBase
     {

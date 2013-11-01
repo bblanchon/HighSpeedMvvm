@@ -1,6 +1,6 @@
-﻿using MvvmHighFrequency.Common;
+﻿using HighSpeedMvvm.Common;
 
-namespace MvvmHighFrequency.Solution3
+namespace HighSpeedMvvm.Solution3
 {
     class ViewModel : ViewModelBase, IRefresh
     {

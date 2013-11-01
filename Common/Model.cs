@@ -1,15 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
-namespace MvvmHighFrequency.Common
+namespace HighSpeedMvvm.Common
 {
     public class Model
     {
-        static readonly long maxDuration = 20000;
+        const long MAX_DURATION = 20000;
 
         public double Progress { get; private set; }
         public event EventHandler<double> ProgressChanged;
@@ -30,11 +27,11 @@ namespace MvvmHighFrequency.Common
             var chrono = new Stopwatch();
             chrono.Start();
 
-            while (elapsed < maxDuration)
+            while (elapsed < MAX_DURATION)
             {
                 elapsed = chrono.ElapsedMilliseconds;
 
-                SetProgress(100.0 * elapsed / maxDuration);
+                SetProgress(100.0 * elapsed / MAX_DURATION);
                 SetFrequency(1.0 * loopCount / elapsed);
 
                 loopCount++;

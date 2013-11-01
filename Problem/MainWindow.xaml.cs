@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 
-namespace MvvmHighFrequency.Problem
+namespace HighSpeedMvvm.Problem
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml

@@ -7,11 +7,11 @@ using System.Windows;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("MvvmHighFrequency.Problem")]
+[assembly: AssemblyTitle("HighSpeedMvvm.Problem")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("MvvmHighFrequency.Problem")]
+[assembly: AssemblyProduct("HighSpeedMvvm.Problem")]
 [assembly: AssemblyCopyright("Copyright © Benoit Blanchon 2013")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

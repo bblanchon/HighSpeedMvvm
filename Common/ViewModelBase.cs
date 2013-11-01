@@ -1,13 +1,6 @@
-﻿using MvvmHighFrequency;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.ComponentModel;
 
-namespace MvvmHighFrequency.Common
+namespace HighSpeedMvvm.Common
 {
     public abstract class ViewModelBase : INotifyPropertyChanged
     {

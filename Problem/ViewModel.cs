@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Windows.Threading;
-using MvvmHighFrequency.Common;
+using HighSpeedMvvm.Common;
 
-namespace MvvmHighFrequency.Problem
+namespace HighSpeedMvvm.Problem
 {
     class ViewModel : ViewModelBase
     {

@@ -1,4 +1,4 @@
-﻿namespace MvvmHighFrequency.Solution3
+﻿namespace HighSpeedMvvm.Solution3
 {
     interface IRefresh
     {

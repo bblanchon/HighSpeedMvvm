@@ -7,8 +7,8 @@
     <ProjectGuid>{1864CEF9-DBCA-49EC-ADC1-A86DC7E2FEC9}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>MvvmHighFrequency.Common</RootNamespace>
-    <AssemblyName>MvvmHighFrequency.Common</AssemblyName>
+    <RootNamespace>HighSpeedMvvm.Common</RootNamespace>
+    <AssemblyName>HighSpeedMvvm.Common</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>

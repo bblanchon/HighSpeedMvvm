@@ -47,7 +47,7 @@ If you run the sample project [MvvmHighFrequency.Problem](Problem), you'd see th
 
 ![Screen Capture](Problem/Pictures/ScreenCapture2.png "Eventually it goes to the end with very poor performance")
 
-Solution 1 : Ignore events that are too closed
+Solution 1 : Ignore events that are too close
 -
 
 The first thing that come in mind is: "OK, I get too many event. I'll just slow them down !". Sure, let's try...
@@ -69,7 +69,7 @@ It's a perfectly viable solution for anyone that uses Reactive framework, but th
 
 If you run the sample project [MvvmHighFrequency.Solution1](Solution1), you'd see that the GUI is responsive an the `Model`'s execution speed is much faster.
 
-![Screen Capture](Solution1/Pictures/ScreenCapture.png "Responsing GUI and acceptable performance")
+![Screen Capture](Solution1/Pictures/ScreenCapture.png "Responsive GUI and acceptable performance")
 
 Solution 2 :  Poll with a DispatcherTimer
 -
@@ -96,6 +96,8 @@ The most common way to implement polling in MVVM is to instanciate a `Dispatcher
     // ...the remaining is identical to the original ViewModel
     
 If you run the sample project [MvvmHighFrequency.Solution2](Solution2), you'd see that the performance is higher that solution 1.
+
+![Screen Capture](Solution2/Pictures/ScreenCapture.png "Responsive GUI and good performance")
  
 Solution 3 : Poll on CompositionTarget.Rendering
 -
@@ -137,6 +139,8 @@ ViewModel:
     }
     
 If you run the sample project [MvvmHighFrequency.Solution3](Solution3), you'd see that the performance is comparable to solution 2.
+
+![Screen Capture](Solution3/Pictures/ScreenCapture.png "Responsive GUI and good performance")
     
 Conclusion
 -

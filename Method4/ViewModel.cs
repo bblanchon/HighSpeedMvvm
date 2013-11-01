@@ -1,16 +1,6 @@
-﻿using MvvmHighFrequency;
-using MvvmHighFrequency.Common;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Input;
-using System.Windows.Threading;
+﻿using MvvmHighFrequency.Common;
 
-namespace Method4
+namespace MvvmHighFrequency.Solution3
 {
     class ViewModel : ViewModelBase, IRefresh
     {

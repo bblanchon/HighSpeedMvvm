@@ -151,6 +151,9 @@ Whether it respects or not the MVVM pattern is really a matter of opinion.  I re
 
 One thing I really appreciate on the polling approach is that it really decouples the `Model`'s and the `ViewModel`'s execution threads. Aboluely no `BeginInvoke()` is required, which gives a great boost to the performance !
 
+By the way, here is a comparison of the memory consumptions:
+![Task manager](Pictures/TaskManager.png "We can clearly see the impact of the calls to BeginInvoke()")
+
 A word about concurrency
 -
 

@@ -1,20 +1,19 @@
-How to implement polling in MVVM
+WPF/MVVM : How to deal with fast changing properties?
 =
 
-The classic MVVM approach, in which you constantly keep your ViewModel (and thus your View) perfectly synchronized with your Model, soon reaches its limits 
-when the properties of the Model changes at a very high frequency.
+Here, I'm gonna describe a problem you may have in a WPF application using the MVVM pattern, if your `Model` is updated at very high frequency.
 
-It happened to me while implementing a model handling a lot of values coming from measuring instruments and i wanted to display the current values, even if they were changing at a very high frequency.
-
-I'll describe this problem in "Method 1" and then suggest 3 simple solutions.
+It happened to me while implementing a `Model` handling a lot of values coming from measuring instruments and I wanted to display the current values, even if they were changing very quickly.
 
 A sample project of each method is available in this repository.
 
 
-Method 1 : ViewModel is attached to Model's events
+The problem with the classic MVVM approach
 -
 
-In the classic MVVM approach, the ViewModel is attached to the Model's events and calls `Dispatcher.BeginInvoke()` to ensure the event `PropertyChanged` is raised in the UI thread.
+In the classic MVVM approach, the `ViewModel` is attached to the `Model`'s events, so has to be updated on each change.
+
+Usually, the `ViewModel`'s event handler calls `Dispatcher.BeginInvoke()` to ensure the event `PropertyChanged` is raised in the UI thread.
 
     public ViewModel()
     {
@@ -40,12 +39,39 @@ In the classic MVVM approach, the ViewModel is attached to the Model's events an
         }
     }
 
-However, this approach wont work well if the Model's events are raised very frequently. Because the ViewModel calls `BeginInvoke()` each time a property changes, it will quickly saturate the event queue of the dispatcher. This usually result in an unresponsive UI.
+However, this approach wont work well if the Model's events are raised very frequently. Because the ViewModel calls `BeginInvoke()` each time a property changes, it will quickly saturate the event queue of the dispatcher. This usually result in an unresponsive GUI.
 
-Method 2 : ViewModel owns a DispatcherTimer
+If you run the sample project [MvvmHighFrequency.Problem](Problem), you'd see that the GUI is completely frozen. If you're lucky you wont have a `OutOfMemoryException` (indeed, each call to `BeginInvoke()` instanciate a message), you'll see that the execution speed of the `Model` is really affected.
+
+Solution 1 : Ignore events that are too closed
 -
 
-A first solution is to use a `DispatcherTimer` in the ViewModel. This means we get rid of the observer pattern, and go back to a plain old polling technique.
+The first thing that come in mind is: "OK, I get too many event. I'll just slow them down !". Sure, let's try...
+
+    public ViewModel()
+    {
+        var dispatcher = Dispatcher.CurrentDispatcher;
+        var model = new Model();
+
+        Observable.FromEventPattern<double>(model, "ProgressChanged")
+                .Sample(TimeSpan.FromMilliseconds(5))
+                .ObserveOn(dispatcher)
+                .Subscribe(x => Progress = x.EventArgs);
+    }
+            
+Here I used Reactive Framework because it offers the `Sample()` method which limits the rate of the events. You 
+
+It's a perfectly viable solution for anyone that uses Reactive framework, but the two next solutions provide a much simpler approach without extra library.
+
+If you run the sample project [MvvmHighFrequency.Solution1](Solution1), you'd see that the GUI is responsive an the `Model`'s execution speed is much faster.
+
+
+Solution 2 :  Poll with a DispatcherTimer
+-
+
+Another way to look a the problem is to accept to loose the "push" approach and to use "polling" instead. Instead of attaching to the event of the Model, the ViewModel will periodically read the values of the Model.
+
+The most common way to implement polling in MVVM is to instanciate a `DispatcherTimer` in the ViewModel.
 
     public ViewModel()
     {
@@ -62,57 +88,14 @@ A first solution is to use a `DispatcherTimer` in the ViewModel. This means we g
         Progress = model.Progress;
     }
     
-    // ...the remaining is identical to Method 1
+    // ...the remaining is identical to the original ViewModel
+    
+If you run the sample project [MvvmHighFrequency.Solution2](Solution2), you'd see that the performance is higher that solution 1.
  
-Method 3 : View owns a DispatcherTimer
+Solution 3 : Poll on CompositionTarget.Rendering
 -
 
-A second solution is to move the `DispatcherTimer` into the View. On each `Tick`, the View class a `ICommand` of the ViewModel.
-
-In the example, I encapsulated the timer in a `CommandTimer` because I originally wanted to be able to instantiate and bind it from the XAML.
-Unfortunately, this would need to add a `x:Key` to the resource and reference it with a `{StaticResource}` somewhere, otherwise the resource wont be instantiated at all.
-So finally, i use the `CommandTimer` from the code behind.
-
-View's code behind
-
-    public MainWindow()
-    {
-        InitializeComponent();
-
-        var vm = new ViewModel();
-        timer = new CommandTimer();
-        timer.Command = vm.Refresh;
-
-        DataContext = vm;
-    }
-    
-ViewModel
-
-    public ViewModel()
-    {
-        model = new Model();
-        Refresh = new DelegateCommand(ExecuteRefresh);
-    }
-
-    public ICommand Refresh
-    {
-        get;
-        private set;
-    }
-
-    private void ExecuteRefresh(object obj)
-    {
-        Progress = model.Progress;
-    }
-    
-    // ...the remaining is identical to Method 1
-
-Method 4 : View is attached to CompositionTarget.Rendering
--
-
-A third solution, it to simply call a `Refresh()` method of the ViewModel from the View. To make it even simpler, we can get rid of the `DispatcherTimer` and instead attach to the `CompositionTarget.Rendering` event.
-
-Of course, this is very similar to Method 3, you may choose to implement a combination of both.
+To make it even simpler, one could simply move the timer from the `ViewModel` to the `View`. Luckily, WPF offers the `CompositionTarget.Rendering` event which is raise each time a frame is rendered. This means you can completely get rid of the `DispatcherTimer`.
 
 View's code behind:
 
@@ -145,18 +128,25 @@ ViewModel:
             Progress = model.Progress;
         }
         
-        // ...the remaining is identical to Method 1
+        // ...the remaining is identical to the original ViewModel
     }
+    
+If you run the sample project [MvvmHighFrequency.Solution3](Solution3), you'd see that the performance is comparable to solution 2.
     
 Conclusion
 -
 
-The last solution is the one I prefer.
+I like simple solutions, that why I really prefer the last one.
 
-Whether this respect or not the MVVM pattern is really a matter of opinion. I think it doesn't break the separation of concerns, and it's good that the View handles the timing issues. So to me, it's MVVM compliant.
+Whether it respects or not the MVVM pattern is really a matter of opinion.  I really like the idea of the `View` being responsible of the timer and the `ViewModel` being responsible of updating its value.
 
-Another advantage of these 3 solutions compared to the observer pattern is that they really decouple the Model and the ViewModel execution. Indeed, the background thread of the Model is never used for something else, like calling `BeginInvoke()`. You can even get rid of the Model's event !
+One thing I really appreciate on the polling approach is that it really decouples the `Model`'s and the `ViewModel`'s execution threads. Aboluely no `BeginInvoke()` is required, which gives a great boost to the performance !
 
-However, since the properties of the Model are accessed from concurrent threads, you may need to add `lock` blocks if the type is bigger that a processor word (in my examples I use a `int` so that's OK).
+A word about concurrency
+-
 
-Moreover, if you have a lot of changing properties in your model, you should group them in a class, like `ModelState`. That way, the ViewModel will only have one property to monitor and only this class really needs to be thread safe.
+You may be carefully with the concurrency when using the polling technique.
+
+Since the properties of the `Model` are accessed from concurrent threads, you may need to add `lock` blocks if the type is bigger that a processor word (in my examples I use a `int` so that's OK).
+
+If you have a lot of changing properties in your model, you should group them in a class, like `ModelState`. That way, the `ViewModel` will only have one property to monitor and only this class needs to be thread safe.

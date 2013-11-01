@@ -1,20 +1,12 @@
-﻿using MvvmHighFrequency;
-using MvvmHighFrequency.Common;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System;
 using System.Windows.Threading;
+using MvvmHighFrequency.Common;
 
-namespace Method2
+namespace MvvmHighFrequency.Solution2
 {
     class ViewModel : ViewModelBase
     {
         readonly Model model;
-        double progress, frequency;
 
         public ViewModel()
         {

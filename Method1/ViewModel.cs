@@ -1,25 +1,18 @@
-﻿using MvvmHighFrequency;
-using MvvmHighFrequency.Common;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System;
 using System.Windows.Threading;
+using MvvmHighFrequency.Common;
 
-namespace Method1
+namespace MvvmHighFrequency.Problem
 {
     class ViewModel : ViewModelBase
     {
-        readonly Model model;
         readonly Dispatcher dispatcher;
 
         public ViewModel()
         {
             dispatcher = Dispatcher.CurrentDispatcher;
-            model = new Model();
+
+            var model = new Model();
 
             model.ProgressChanged += OnModelProgressChanged;
             model.FrequencyChanged += OnModelFrequencyChanged;
@@ -27,12 +20,12 @@ namespace Method1
 
         void OnModelProgressChanged(object sender, double newValue)
         {
-            dispatcher.BeginInvoke((Action)delegate() { Progress = newValue; });
+            dispatcher.BeginInvoke((Action)delegate { Progress = newValue; });
         }
 
         void OnModelFrequencyChanged(object sender, double newValue)
         {
-            dispatcher.BeginInvoke((Action)delegate() { Frequency = newValue; });
+            dispatcher.BeginInvoke((Action)delegate { Frequency = newValue; });
         }    
     }
 }

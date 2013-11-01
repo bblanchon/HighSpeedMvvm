@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MvvmHighFrequency;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -34,7 +35,7 @@ namespace Method1
             }
         }
 
-        void OnModelProgressChanged(double newValue)
+        void OnModelProgressChanged(object sender, double newValue)
         {
             dispatcher.BeginInvoke((Action)delegate() { Progress = newValue; });
         }

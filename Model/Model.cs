@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Method3
+namespace MvvmHighFrequency
 {
-    class Model
+    public class Model
     {
         public Model()
         {
@@ -15,7 +15,7 @@ namespace Method3
         }
 
         public double Progress { get; private set; }
-        //public event Action<double> ProgressChanged; (not required anymore)
+        public event Action<object,double> ProgressChanged;
 
         void LongRunningBackgroundTask()
         {
@@ -23,12 +23,12 @@ namespace Method3
             var chrono = new Stopwatch();
 
             chrono.Start();
-
-            while (chrono.Elapsed < duration)
+            while( chrono.Elapsed < duration)
             {
-                Progress = 100.0 * chrono.ElapsedTicks / duration.Ticks;
+                Progress = 100.0 * chrono.ElapsedMilliseconds / duration.TotalMilliseconds;
 
-                // no need to raise a event anymore
+                if (ProgressChanged != null)
+                    ProgressChanged(this, Progress);      
             }
         }
     }

@@ -1,4 +1,5 @@
 [WPF/MVVM] How to deal with fast changing properties
+=
 
 This repository contains 4 sample WPF/MVVM applications that  implement different techniques to deal with fast changing properties in the Model.
 
